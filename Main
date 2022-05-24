@@ -1,0 +1,38 @@
+package com.company;
+
+import static java.lang.System.*;
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Main {
+
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static void main(String[] args) {
+
+        //setup
+        correctWord todaysWord = new correctWord();
+        Scanner s = new Scanner(System.in);
+        int guesses = 1;
+
+        //instructions
+        out.println("Welcome to Wordelle!(not a violation of copyright)\nMy job is to pick a random 5-letter word, and your job is to guess it");
+        out.println(ANSI_GREEN_BACKGROUND + "Letters that are guessed correctly will appear green like this" + ANSI_RESET);
+        out.println(ANSI_YELLOW_BACKGROUND + "Letters that are guessed incorrectly but appear elsewhere in the word appear yellow like this" + ANSI_RESET);
+        out.println("Note: there are NO double letters!\nGood luck!\n\n");
+
+        Guess playerGuess;
+
+        do { //runs on loop until isCorrectGuess is true ie. player guessed correctly
+            out.println("Guess #" + guesses);
+            out.println("Guess the word:");
+            playerGuess = new Guess(s.next());//creates a guess with the player's answer turned into a 5-char array
+            if (!Arrays.toString(playerGuess.getPlayerGuess()).equals("[£, £, £, £, £]")) { //only runs following code if player entered a 5-letter word
+                out.println(todaysWord.check(playerGuess.getPlayerGuess()));
+                guesses += 1;
+            }
+        } while (!todaysWord.isCorrectGuess());
+        out.println("You guessed the word in " +guesses+ " tries! The word was " +todaysWord.getWord());
+    }
+}

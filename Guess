@@ -1,0 +1,21 @@
+package com.company;
+
+import static java.lang.System.*;
+
+public class Guess extends Word{
+
+    char[] playerGuess = new char[5];
+    public Guess(String pG){
+        pG = pG.toUpperCase();//converts initial string to all uppercase
+        if (pG.length() == 5) {
+            //convert guess string into char array
+            for (int i = 0; i < 5; i++) playerGuess[i] = pG.charAt(i);
+        } else{
+            out.println("Error: not a 5 letter word"); //leaves playerGuess null, loop in Main repeats
+            playerGuess = new char[]{'£', '£', '£', '£', '£'};
+        }
+    }
+    public char[] getPlayerGuess(){
+        return playerGuess;
+    }
+}
